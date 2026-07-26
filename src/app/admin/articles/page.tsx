@@ -28,7 +28,7 @@ export default function AdminArticlesPage() {
   const openModal = (item?: any) => {
     if (item) {
       setEditing(item);
-      setForm({ title: item.title, summary: item.summary || "", content: item.content, category: item.category || "", publishDate: item.publishDate || "", featured: item.featured });
+      setForm({ title: item.title, summary: item.summary || "", content: item.content, category: item.category || "", publishDate: item.publish_date || "", featured: item.featured });
     } else {
       setEditing(null);
       setForm({ title: "", summary: "", content: "", category: "", publishDate: "", featured: false });

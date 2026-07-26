@@ -51,7 +51,7 @@ export default function AdminMessagesPage() {
                     <p className="text-sm text-gray-500">{msg.email}</p>
                     <p className="text-sm text-gray-400 truncate mt-1">{msg.message}</p>
                   </div>
-                  <span className="text-xs text-gray-400 hidden sm:block">{formatDate(msg.createdAt)}</span>
+                  <span className="text-xs text-gray-400 hidden sm:block">{formatDate(msg.created_at)}</span>
                   <div className="flex gap-2">
                     <button onClick={() => setSelected(msg)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEye className="w-5 h-5" /></button>
                     <button onClick={() => handleDelete(msg.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-5 h-5" /></button>
@@ -82,7 +82,7 @@ export default function AdminMessagesPage() {
             </div>
             {selected.subject && <p className="text-sm text-gray-500"><strong>الموضوع:</strong> {selected.subject}</p>}
             <p className="text-gray-700 leading-relaxed">{selected.message}</p>
-            <p className="text-xs text-gray-400">{formatDate(selected.createdAt)}</p>
+            <p className="text-xs text-gray-400">{formatDate(selected.created_at)}</p>
           </div>
         )}
       </Modal>

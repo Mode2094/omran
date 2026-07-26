@@ -13,7 +13,7 @@ export default function AdminResearchPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
   const [form, setForm] = useState({
-    title: "", summary: "", content: "", category: "", publishDate: "", references: "", featured: false,
+    title: "", summary: "", content: "", category: "", publishDate: "", featured: false,
   });
 
   const fetchItems = () => {
@@ -28,10 +28,10 @@ export default function AdminResearchPage() {
   const openModal = (item?: any) => {
     if (item) {
       setEditing(item);
-      setForm({ title: item.title, summary: item.summary || "", content: item.content, category: item.category || "", publishDate: item.publishDate || "", references: item.references || "", featured: item.featured });
+      setForm({ title: item.title, summary: item.summary || "", content: item.content, category: item.category || "", publishDate: item.publish_date || "", featured: item.featured });
     } else {
       setEditing(null);
-      setForm({ title: "", summary: "", content: "", category: "", publishDate: "", references: "", featured: false });
+      setForm({ title: "", summary: "", content: "", category: "", publishDate: "", featured: false });
     }
     setModalOpen(true);
   };
@@ -111,7 +111,6 @@ export default function AdminResearchPage() {
             <Input label="التصنيف" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
             <Input label="تاريخ النشر" value={form.publishDate} onChange={(e) => setForm({ ...form, publishDate: e.target.value })} />
           </div>
-          <Textarea label="المراجع" value={form.references} onChange={(e) => setForm({ ...form, references: e.target.value })} rows={3} />
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">صورة الغلاف</label>

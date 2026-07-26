@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, summary, content, coverImage, pdfFile, category, references, publishDate, featured } = body;
+    const { title, summary, content, coverImage, pdfFile, category, publishDate, featured } = body;
 
     if (!title || !content) {
       return NextResponse.json({ error: "عنوان ومحتوى البحث مطلوبان" }, { status: 400 });
@@ -32,7 +32,6 @@ export async function POST(request: NextRequest) {
         cover_image: coverImage || null,
         pdf_file: pdfFile || null,
         category: category || null,
-        references: references || null,
         publish_date: publishDate || null,
         featured: featured || false,
       }])

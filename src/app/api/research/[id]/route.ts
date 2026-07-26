@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
-    const { title, summary, content, coverImage, pdfFile, category, references, publishDate, featured } = body;
+    const { title, summary, content, coverImage, pdfFile, category, publishDate, featured } = body;
 
     const { data: research, error } = await supabase
       .from("research")
@@ -29,7 +29,6 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         cover_image: coverImage || null,
         pdf_file: pdfFile || null,
         category: category || null,
-        references: references || null,
         publish_date: publishDate || null,
         featured: featured || false,
         updated_at: new Date().toISOString(),

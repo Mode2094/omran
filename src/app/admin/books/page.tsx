@@ -29,7 +29,7 @@ export default function AdminBooksPage() {
   const openModal = (book?: any) => {
     if (book) {
       setEditingBook(book);
-      setForm({ title: book.title, description: book.description, author: book.author || "عمران سميح نزال", category: book.category || "", publishDate: book.publishDate || "", purchaseLink: book.purchaseLink || "", featured: book.featured });
+      setForm({ title: book.title, description: book.description, author: book.author || "عمران سميح نزال", category: book.category || "", publishDate: book.publish_date || "", purchaseLink: book.purchase_link || "", featured: book.featured });
     } else {
       setEditingBook(null);
       setForm({ title: "", description: "", author: "عمران سميح نزال", category: "", publishDate: "", purchaseLink: "", featured: false });
@@ -81,7 +81,7 @@ export default function AdminBooksPage() {
               {books.map((book: any) => (
                 <div key={book.id} className="flex items-center gap-4 p-6 hover:bg-gray-50 transition-colors">
                   <div className="w-16 h-20 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    {book.coverImage ? <img src={book.coverImage} alt="" className="w-full h-full object-cover rounded-lg" /> : <FiBook className="w-6 h-6 text-primary-300" />}
+                    {book.cover_image ? <img src={book.cover_image} alt="" className="w-full h-full object-cover rounded-lg" /> : <FiBook className="w-6 h-6 text-primary-300" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-gray-900 truncate">{book.title}</h3>
