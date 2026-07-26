@@ -133,13 +133,6 @@ export default function ResearchDetailPage() {
             )}
           </motion.div>
 
-          <div className="text-center mt-8">
-            <Link href="/contact">
-              <button className="px-8 py-4 bg-gradient-to-l from-accent-500 to-accent-600 text-white font-bold rounded-2xl hover:from-accent-600 hover:to-accent-700 transition-all duration-300 shadow-lg shadow-accent-500/30 hover:shadow-xl hover:-translate-y-0.5">
-                للطلب والاستفسار
-              </button>
-            </Link>
-          </div>
         </section>
       </main>
       <Footer />
