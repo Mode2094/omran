@@ -44,7 +44,7 @@ export default function ResearchPage() {
               <FiFileText className="w-16 h-16 mx-auto mb-6 opacity-80" />
               <h1 className="text-4xl md:text-5xl font-bold mb-4">الدروس والأبحاث القرآنية</h1>
               <p className="text-xl text-white/80 max-w-2xl mx-auto">
-                استكشف دروسي وأبحاثي المتخصصة في تدبر القرآن الكريم وعلومه وبيانه
+                استكشف الدروس والأبحاث المتخصصة من مدرسة العمران في تدبر القرآن الكريم وعلومه وبيانه
               </p>
             </motion.div>
           </div>
@@ -95,9 +95,9 @@ export default function ResearchPage() {
                 >
                   <Card padding="lg">
                     <div className="flex flex-col md:flex-row gap-6">
-                      {item.coverImage && (
+                      {item.cover_image && (
                         <div className="md:w-48 h-48 bg-gradient-to-br from-accent-100 to-primary-100 rounded-xl overflow-hidden flex-shrink-0">
-                          <img src={item.coverImage} alt={item.title} className="w-full h-full object-cover" />
+                          <img src={item.cover_image} alt={item.title} className="w-full h-full object-cover" />
                         </div>
                       )}
                       <div className="flex-1">
@@ -105,15 +105,15 @@ export default function ResearchPage() {
                           {item.category && (
                             <span className="text-xs px-3 py-1 bg-accent-50 text-accent-600 rounded-full">{item.category}</span>
                           )}
-                          {item.publishDate && (
-                            <span className="text-xs text-gray-400">{item.publishDate}</span>
+                          {item.publish_date && (
+                            <span className="text-xs text-gray-400">{item.publish_date}</span>
                           )}
                         </div>
                         <h3 className="font-bold text-xl text-gray-900 mb-2">{item.title}</h3>
                         {item.summary && <p className="text-gray-500 mb-3 line-clamp-2">{item.summary}</p>}
                         <p className="text-gray-600 text-sm line-clamp-3 mb-4">{item.content}</p>
-                        {item.pdfFile && (
-                          <a href={item.pdfFile} download>
+                        {item.pdf_file && (
+                          <a href={item.pdf_file} download>
                             <Button variant="accent" size="sm">
                               <FiDownload className="w-4 h-4 ml-2" />
                               تحميل PDF

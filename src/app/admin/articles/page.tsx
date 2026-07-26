@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FiPlus, FiEdit3, FiTrash2, FiEdit3 as FiArticle } from "react-icons/fi";
+import { FiPlus, FiEdit3, FiTrash2 } from "react-icons/fi";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { Input, Textarea } from "@/components/ui/Input";
@@ -13,8 +13,10 @@ export default function AdminArticlesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
   const [form, setForm] = useState({
-    title: "", summary: "", content: "", category: "", publishDate: "", featured: false,
+    title: "", summary: "", content: "", category: "", publishDate: "", coverImage: "", featured: false,
   });
+  const [imagePreview, setImagePreview] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const fetchItems = () => {
     fetch("/api/articles")
@@ -28,10 +30,12 @@ export default function AdminArticlesPage() {
   const openModal = (item?: any) => {
     if (item) {
       setEditing(item);
-      setForm({ title: item.title, summary: item.summary || "", content: item.content, category: item.category || "", publishDate: item.publish_date || "", featured: item.featured });
+      setForm({ title: item.title, summary: item.summary || "", content: item.content, category: item.category || "", publishDate: item.publish_date || "", coverImage: item.cover_image || "", featured: item.featured });
+      setImagePreview(item.cover_image || "");
     } else {
       setEditing(null);
-      setForm({ title: "", summary: "", content: "", category: "", publishDate: "", featured: false });
+      setForm({ title: "", summary: "", content: "", category: "", publishDate: "", coverImage: "", featured: false });
+      setImagePreview("");
     }
     setModalOpen(true);
   };
@@ -50,14 +54,29 @@ export default function AdminArticlesPage() {
     fetchItems();
   };
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setUploading(true);
     const formData = new FormData();
     formData.append("file", file);
-    const res = await fetch("/api/upload", { method: "POST", body: formData });
-    const data = await res.json();
-    if (data.url) setForm({ ...form, [field]: data.url });
+    try {
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      const data = await res.json();
+      if (data.url) {
+        setForm({ ...form, coverImage: data.url });
+        setImagePreview(data.url);
+      }
+    } catch (err) {
+      console.error("Upload failed", err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleUrlInput = (url: string) => {
+    setForm({ ...form, coverImage: url });
+    setImagePreview(url);
   };
 
   return (
@@ -79,8 +98,8 @@ export default function AdminArticlesPage() {
             <div className="divide-y divide-gray-100">
               {items.map((item: any) => (
                 <div key={item.id} className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 hover:bg-gray-50 transition-colors">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gold-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FiEdit3 className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gold-50 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    {item.cover_image ? <img src={item.cover_image} alt="" className="w-full h-full object-cover rounded-xl" /> : <FiEdit3 className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-gray-900 truncate text-sm sm:text-base">{item.title}</h3>
@@ -111,10 +130,25 @@ export default function AdminArticlesPage() {
             <Input label="التصنيف" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
             <Input label="تاريخ النشر" value={form.publishDate} onChange={(e) => setForm({ ...form, publishDate: e.target.value })} />
           </div>
+
+          {/* Cover Image Section */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">صورة الغلاف</label>
-            <input type="file" accept="image/*" onChange={(e) => handleUpload(e, "coverImage")} className="w-full text-sm text-gray-500 file:ml-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-gold-50 file:text-gold-600" />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
+                <Input placeholder="الصق رابط الصورة هنا..." value={form.coverImage} onChange={(e) => handleUrlInput(e.target.value)} />
+                <p className="text-xs text-gray-400 mt-1">أو ارفع صورة من جهازك</p>
+                <input type="file" accept="image/*" onChange={handleUpload} disabled={uploading} className="mt-2 w-full text-sm text-gray-500 file:ml-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-gold-50 file:text-gold-600" />
+                {uploading && <p className="text-xs text-gold-500 mt-1">جاري الرفع...</p>}
+              </div>
+              {imagePreview && (
+                <div className="w-24 h-32 rounded-xl overflow-hidden border border-gray-200 flex-shrink-0">
+                  <img src={imagePreview} alt="معاينة" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </div>
           </div>
+
           <div className="flex items-center gap-2">
             <input type="checkbox" id="featured" checked={form.featured} onChange={(e) => setForm({ ...form, featured: e.target.checked })} className="w-4 h-4 rounded border-gray-300" />
             <label htmlFor="featured" className="text-sm text-gray-700">مقال مميز</label>

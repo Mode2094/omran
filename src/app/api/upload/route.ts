@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import { existsSync } from "fs";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,20 +10,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "ملف مطلوب" }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\u0600-\u06FF_-]/g, "_")}`;
 
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\u0600-\u06FF_]/g, "_")}`;
-    const uploadDir = join(process.cwd(), "public", "uploads");
+    const { data, error } = await supabase.storage
+      .from("public")
+      .upload(fileName, file, { contentType: file.type });
 
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
+    if (error) throw error;
 
-    const filePath = join(uploadDir, fileName);
-    await writeFile(filePath, buffer);
+    const { data: urlData } = supabase.storage.from("public").getPublicUrl(data.path);
 
-    return NextResponse.json({ url: `/uploads/${fileName}` });
+    return NextResponse.json({ url: urlData.publicUrl });
   } catch (error) {
     return NextResponse.json({ error: "خطأ في الرفع" }, { status: 500 });
   }

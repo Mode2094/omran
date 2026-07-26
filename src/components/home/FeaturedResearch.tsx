@@ -52,7 +52,7 @@ export default function FeaturedResearch() {
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
-            أبحاث ومقالات في علوم القرآن الكريم والتدبر القرآني
+            أبحاث ومقالات في علوم القرآن الكريم والتدبر القرآني من مدرسة العمران
           </motion.p>
         </div>
 

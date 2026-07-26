@@ -42,7 +42,7 @@ export default function BooksPage() {
               <FiBook className="w-16 h-16 mx-auto mb-6 opacity-80" />
               <h1 className="text-4xl md:text-5xl font-bold mb-4">الكتب</h1>
               <p className="text-xl text-white/80 max-w-2xl mx-auto">
-                اكتشف مجموعتي من الكتب المتخصصة في تدبر القرآن الكريم وعلومه وبيانه
+                اكتشف الإصدارات من مدرسة العمران في تدبر القرآن الكريم وعلومه وبيانه
               </p>
             </motion.div>
           </div>
@@ -90,8 +90,8 @@ export default function BooksPage() {
                 >
                   <Card className="h-full flex flex-col">
                     <div className="aspect-[3/4] bg-gradient-to-br from-primary-100 to-accent-100 rounded-xl mb-4 overflow-hidden">
-                      {book.coverImage ? (
-                        <img src={book.coverImage} alt={book.title} className="w-full h-full object-cover" />
+                      {book.cover_image ? (
+                        <img src={book.cover_image} alt={book.title} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <div className="text-center">
@@ -106,8 +106,8 @@ export default function BooksPage() {
                         {book.category && (
                           <span className="text-xs px-3 py-1 bg-primary-50 text-primary-500 rounded-full">{book.category}</span>
                         )}
-                        {book.publishDate && (
-                          <span className="text-xs text-gray-400">{book.publishDate}</span>
+                        {book.publish_date && (
+                          <span className="text-xs text-gray-400">{book.publish_date}</span>
                         )}
                       </div>
                       <h3 className="font-bold text-lg text-gray-900 mb-2">{book.title}</h3>
@@ -115,16 +115,16 @@ export default function BooksPage() {
                       <p className="text-sm text-gray-500 line-clamp-3">{book.description}</p>
                     </div>
                     <div className="flex gap-2 mt-4">
-                      {book.pdfFile && (
-                        <a href={book.pdfFile} download className="flex-1">
+                      {book.pdf_file && (
+                        <a href={book.pdf_file} download className="flex-1">
                           <Button variant="accent" size="sm" className="w-full">
                             <FiDownload className="w-4 h-4 ml-2" />
                             تحميل PDF
                           </Button>
                         </a>
                       )}
-                      {book.purchaseLink && (
-                        <a href={book.purchaseLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                      {book.purchase_link && (
+                        <a href={book.purchase_link} target="_blank" rel="noopener noreferrer" className="flex-1">
                           <Button variant="primary" size="sm" className="w-full">
                             <FiExternalLink className="w-4 h-4 ml-2" />
                             اقتناء
@@ -140,7 +140,7 @@ export default function BooksPage() {
             <div className="text-center py-20">
               <FiBook className="w-20 h-20 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-2">لا توجد كتب بعد</h3>
-              <p className="text-gray-500">سيتم إضافة الكتب المتخصصة في علوم القرآن قريباً من خلال لوحة التحكم</p>
+              <p className="text-gray-500">سيتم إضافة الكتب قريباً من خلال لوحة التحكم</p>
             </div>
           )}
         </section>

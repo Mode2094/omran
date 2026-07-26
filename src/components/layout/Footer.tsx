@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FiYoutube, FiFacebook, FiMail, FiArrowUp } from "react-icons/fi";
+import { FiYoutube, FiFacebook, FiMail, FiArrowUp, FiPhone } from "react-icons/fi";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -14,15 +14,26 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <img src="/logo.png" alt="شعار عمران سميح نزال" className="w-12 h-12 rounded-xl object-contain bg-white/10 p-1" />
+              <img src="/logo.png" alt="مدرسة العمران" className="w-12 h-12 rounded-xl object-contain bg-white/10 p-1" />
               <div>
-                <h3 className="font-bold text-lg">عمران سميح نزال</h3>
-                <p className="text-white/60 text-sm">دروس في تدبر القرآن الكريم وعلومه وبيانه</p>
+                <h3 className="font-bold text-lg">مدرسة العمران</h3>
+                <p className="text-white/60 text-sm">في تدبر القرآن الكريم وعلومه وبيانه</p>
               </div>
             </div>
             <p className="text-white/70 leading-relaxed">
-              أسعى من خلال أعمالي إلى تعليم المسلمين كتابهم الكريم والعودة بالتفكر في آياته كما كان يفعل السلف الصالح.
+              تسعى مدرسة العمران إلى تعليم المسلمين كتابهم الكريم والعودة بالتفكر في آياته كما كان يفعل السلف الصالح، وفق المنهج التاريخي لسور القرآن الكريم.
             </p>
+            <div className="mt-6 space-y-2">
+              <p className="text-white/60 text-sm">عمران سميح نزال - الباحث والكاتب في الدراسات الإسلامية</p>
+              <div className="flex items-center gap-2 text-white/60 text-sm">
+                <FiPhone className="w-4 h-4 text-gold-400" />
+                <span>0796397366 - 00962</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 text-sm">
+                <FiMail className="w-4 h-4 text-gold-400" />
+                <span>omran_nazal@yahoo.com</span>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -38,13 +49,13 @@ export default function Footer() {
                 الدروس والأبحاث
               </Link>
               <Link href="/contact" className="block text-white/70 hover:text-white transition-colors">
-                تواصل معي
+                تواصل معنا
               </Link>
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-6">تواصل معي</h4>
+            <h4 className="font-bold text-lg mb-6">تابعنا</h4>
             <div className="flex gap-4 mb-6">
               <a
                 href="https://www.youtube.com/channel/UCrLF7D4Blxxlj4tbJeABaSA"
@@ -63,21 +74,27 @@ export default function Footer() {
                 <FiFacebook className="w-5 h-5" />
               </a>
               <a
-                href="mailto:contact@omran-nazal.com"
+                href="mailto:omran_nazal@yahoo.com"
                 className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-accent-500 transition-all duration-300"
               >
                 <FiMail className="w-5 h-5" />
               </a>
             </div>
+            <p className="text-white/60 text-sm mb-4">
+              للاستفسار وطلب الكتب:
+            </p>
             <p className="text-white/60 text-sm">
-              البريد الإلكتروني: contact@omran-nazal.com
+              مكتبة محمد دنديس / عمان - الأردن / وسط البلد
+            </p>
+            <p className="text-white/60 text-sm">
+              هاتف: 4653390 - 0796009314
             </p>
           </div>
         </div>
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} عمران سميح نزال. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} مدرسة العمران في تدبر القرآن الكريم. جميع الحقوق محفوظة.
           </p>
           <button
             onClick={scrollToTop}

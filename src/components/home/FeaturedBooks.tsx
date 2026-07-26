@@ -31,7 +31,7 @@ export default function FeaturedBooks() {
             className="inline-flex items-center gap-2 px-4 py-2 bg-accent-50 rounded-full mb-6 border border-accent-100"
           >
             <FiBook className="w-4 h-4 text-accent-600" />
-            <span className="text-sm font-medium text-accent-700">كتب ومخطوطات</span>
+            <span className="text-sm font-medium text-accent-700">إصدارات المدرسة</span>
           </motion.div>
 
           <motion.h2
@@ -41,7 +41,7 @@ export default function FeaturedBooks() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
           >
-            أحدث إصداراتي
+            أحدث الإصدارات
           </motion.h2>
 
           <motion.p
@@ -51,7 +51,7 @@ export default function FeaturedBooks() {
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
-            مجموعة من الكتب والمخطوطات في علوم القرآن الكريم والتدبر القرآني
+            مجموعة من الكتب والمخطوطات في علوم القرآن الكريم والتدبر القرآني الصادرة عن مدرسة العمران
           </motion.p>
         </div>
 
@@ -88,7 +88,7 @@ export default function FeaturedBooks() {
                     {book.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-400">كتاب إلكتروني</span>
+                    <span className="text-sm text-gray-400">كتاب</span>
                     <div className="flex items-center gap-1 text-accent-600 group-hover:gap-2 transition-all">
                       <span className="text-sm font-medium">اقرأ المزيد</span>
                       <FiArrowLeft className="w-4 h-4" />
@@ -108,7 +108,7 @@ export default function FeaturedBooks() {
         >
           <Link href="/books">
             <button className="px-8 py-4 bg-gradient-to-l from-accent-500 to-accent-600 text-white font-bold rounded-2xl hover:from-accent-600 hover:to-accent-700 transition-all duration-300 shadow-lg shadow-accent-500/30 hover:shadow-xl hover:shadow-accent-500/40 hover:-translate-y-0.5 flex items-center gap-3 mx-auto">
-              <span>عرض جميع الكتب</span>
+              <span>عرض جميع الإصدارات</span>
               <FiArrowLeft className="w-5 h-5" />
             </button>
           </Link>

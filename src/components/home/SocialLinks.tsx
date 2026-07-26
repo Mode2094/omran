@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiYoutube, FiFacebook, FiMessageCircle, FiArrowLeft, FiSend } from "react-icons/fi";
+import { FiYoutube, FiFacebook, FiMessageCircle, FiSend, FiPhone, FiMail } from "react-icons/fi";
 
 export default function SocialLinks() {
   return (
@@ -25,11 +25,11 @@ export default function SocialLinks() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/10">
               <FiMessageCircle className="w-4 h-4 text-gold-400" />
-              <span className="text-sm font-medium text-white/90">تواصل معي</span>
+              <span className="text-sm font-medium text-white/90">تواصل معنا</span>
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              تابعني على
+              تابعنا على
               <br />
               <span className="bg-gradient-to-l from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">
                 منصات التواصل الاجتماعي
@@ -37,7 +37,7 @@ export default function SocialLinks() {
             </h2>
 
             <p className="text-lg text-white/60 mb-10 leading-relaxed">
-              يمكنكم متابعتي على منصات التواصل الاجتماعي للحصول على آخر الدروس والمحتوى القرآني المتجدد
+              يمكنكم متابعة مدرسة العمران على منصات التواصل الاجتماعي للحصول على آخر الدروس والمحتوى القرآني المتجدد
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -70,6 +70,18 @@ export default function SocialLinks() {
                   <p className="text-sm text-white/60">تابع الصفحة</p>
                 </div>
               </a>
+            </div>
+
+            {/* Contact Info */}
+            <div className="mt-8 pt-8 border-t border-white/10 space-y-4">
+              <div className="flex items-center gap-3 text-white/70">
+                <FiPhone className="w-5 h-5 text-gold-400" />
+                <span className="text-sm">0796397366 - 00962</span>
+              </div>
+              <div className="flex items-center gap-3 text-white/70">
+                <FiMail className="w-5 h-5 text-gold-400" />
+                <span className="text-sm">omran_nazal@yahoo.com</span>
+              </div>
             </div>
           </motion.div>
 

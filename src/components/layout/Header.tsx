@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/", label: "الرئيسية", icon: FiHome },
   { href: "/books", label: "الكتب", icon: FiBook },
   { href: "/research", label: "الدروس والأبحاث", icon: FiFileText },
-  { href: "/contact", label: "تواصل معي", icon: FiMail },
+  { href: "/contact", label: "تواصل معنا", icon: FiMail },
 ];
 
 export default function Header() {
@@ -22,10 +22,10 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="شعار عمران سميح نزال" className="w-10 h-10 rounded-xl object-contain" />
+            <img src="/logo.png" alt="مدرسة العمران" className="w-10 h-10 rounded-xl object-contain" />
             <div className="hidden sm:block">
-              <h1 className="font-bold text-lg text-gray-900">عمران سميح نزال</h1>
-              <p className="text-xs text-gray-500">دروس في تدبر القرآن الكريم</p>
+              <h1 className="font-bold text-lg text-gray-900">مدرسة العمران</h1>
+              <p className="text-xs text-gray-500">في تدبر القرآن الكريم</p>
             </div>
           </Link>
 

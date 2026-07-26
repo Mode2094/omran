@@ -63,7 +63,7 @@ export default function Hero() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/10">
                 <FiStar className="w-4 h-4 text-gold-400" />
-                <span className="text-sm font-medium text-white/90">دروس في تدبر القرآن الكريم وعلومه وبيانه</span>
+                <span className="text-sm font-medium text-white/90">مدرسة العمران في تدبر القرآن الكريم</span>
               </div>
             </motion.div>
 
@@ -73,10 +73,10 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
             >
-              <span className="text-white/60 block text-2xl md:text-3xl font-normal mb-4">السلام عليكم، أنا</span>
-              <span className="text-white">عمران سميح</span>
+              <span className="text-white/60 block text-2xl md:text-3xl font-normal mb-4">بسم الله الرحمن الرحيم</span>
+              <span className="text-white">مدرسة</span>
               <br />
-              <span className="bg-gradient-to-l from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">نزال</span>
+              <span className="bg-gradient-to-l from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">العمران</span>
             </motion.h1>
 
             <motion.p
@@ -85,7 +85,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg md:text-xl text-white/60 max-w-xl mb-10 leading-relaxed"
             >
-              أقدم دروساً شاملة في تدبر القرآن الكريم وعلومه وبيانه، لمساعدة المسلمين على فهم كتابهم الكريم والتفكر في آياته العظيمة
+              تقدم دروساً شاملة في تدبر القرآن الكريم وعلومه وبيانه، وفق المنهج التاريخي الذي نزلت عليه سور القرآن الكريم، لمساعدة المسلمين على فهم كتابهم الكريم والتفكر في آياته العظيمة
             </motion.p>
 
             <motion.div
@@ -97,7 +97,7 @@ export default function Hero() {
               <Link href="/books">
                 <button className="px-8 py-4 bg-gradient-to-l from-gold-500 to-gold-600 text-white font-bold rounded-2xl hover:from-gold-600 hover:to-gold-700 transition-all duration-300 shadow-lg shadow-gold-500/30 hover:shadow-xl hover:shadow-gold-500/40 hover:-translate-y-0.5 flex items-center gap-3">
                   <FiBookOpen className="w-5 h-5" />
-                  استكشف كتبي
+                  إصدارات المدرسة
                 </button>
               </Link>
               <Link href="/research">
@@ -130,7 +130,7 @@ export default function Hero() {
                 <FiFacebook className="w-5 h-5" />
               </a>
               <div className="w-px h-8 bg-white/20 mx-2" />
-              <span className="text-white/40 text-sm">تابعني على التواصل</span>
+              <span className="text-white/40 text-sm">تابعنّا على التواصل</span>
             </motion.div>
           </div>
 
@@ -149,7 +149,7 @@ export default function Hero() {
               <div className="relative w-80 h-96 md:w-96 md:h-[28rem] rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl">
                 <img
                   src="/uploads/profile.png"
-                  alt="عمران سميح نزال"
+                  alt="عمران سميح نزال - مدرسة العمران"
                   className="w-full h-full object-cover"
                 />
                 {/* Overlay Gradient */}
@@ -168,8 +168,8 @@ export default function Hero() {
                     <FiBookOpen className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900">+١٢</p>
-                    <p className="text-xs text-gray-500">كتاب منشور</p>
+                    <p className="font-bold text-gray-900">+١٠</p>
+                    <p className="text-xs text-gray-500">كتب صادرة</p>
                   </div>
                 </div>
               </motion.div>
@@ -181,7 +181,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 1.4 }}
                 className="absolute -top-4 -left-4 md:-left-8 bg-gradient-to-br from-gold-500 to-gold-600 text-white rounded-2xl px-4 py-3 shadow-xl"
               >
-                <p className="font-bold text-sm">خبير القرآن الكريم</p>
+                <p className="font-bold text-sm">مدرّسة في التدبر القرآني</p>
               </motion.div>
             </div>
           </motion.div>
