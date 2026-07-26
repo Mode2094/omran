@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { FiLayout, FiBook, FiFileText, FiEdit3, FiMessageSquare, FiLogOut, FiMenu, FiX } from "react-icons/fi";
+import { FiLayout, FiBook, FiFileText, FiEdit3, FiMessageSquare, FiLogOut, FiMenu, FiX, FiSettings } from "react-icons/fi";
 
 const adminLinks = [
   { href: "/admin", label: "لوحة التحكم", icon: FiLayout },
@@ -11,6 +11,7 @@ const adminLinks = [
   { href: "/admin/research", label: "إدارة الأبحاث", icon: FiFileText },
   { href: "/admin/articles", label: "إدارة المقالات", icon: FiEdit3 },
   { href: "/admin/messages", label: "الرسائل", icon: FiMessageSquare },
+  { href: "/admin/settings", label: "الإعدادات", icon: FiSettings },
 ];
 
 export default function AdminHeader() {
@@ -25,10 +26,10 @@ export default function AdminHeader() {
 
   return (
     <>
-      <aside className="hidden lg:flex flex-col w-72 bg-white border-l border-gray-200 min-h-screen font-arabic">
+      <aside className="hidden lg:flex flex-col w-72 bg-white border-l border-gray-200 min-h-screen">
         <div className="p-6 border-b border-gray-100">
           <Link href="/admin" className="flex items-center gap-3">
-            <img src="/logo.png" alt="شعار عمران سميح نزال" className="w-10 h-10 rounded-xl object-contain" />
+            <img src="/logo.png" alt="شعار" className="w-10 h-10 rounded-xl object-contain" />
             <div>
               <h1 className="font-bold text-gray-900">لوحة التحكم</h1>
               <p className="text-xs text-gray-500">إدارة الموقع</p>
@@ -74,7 +75,7 @@ export default function AdminHeader() {
         </div>
       </aside>
 
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between font-arabic">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
         <h1 className="font-bold">لوحة التحكم</h1>
         <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 rounded-lg hover:bg-gray-100">
           {mobileOpen ? <FiX className="w-5 h-5" /> : <FiMenu className="w-5 h-5" />}
@@ -83,7 +84,7 @@ export default function AdminHeader() {
 
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-black/50" onClick={() => setMobileOpen(false)}>
-          <div className="w-72 bg-white h-full mr-auto p-4 space-y-2 font-arabic" onClick={(e) => e.stopPropagation()}>
+          <div className="w-72 bg-white h-full mr-auto p-4 space-y-2" onClick={(e) => e.stopPropagation()}>
             {adminLinks.map((link) => {
               const Icon = link.icon;
               return (

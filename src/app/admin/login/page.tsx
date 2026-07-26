@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FiLock, FiUser } from "react-icons/fi";
-import Button from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -41,7 +39,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-500 to-primary-800 flex items-center justify-center p-4 font-arabic">
+    <div className="min-h-screen bg-gradient-to-br from-primary-500 to-primary-800 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -70,7 +68,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all font-arabic"
+                className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all"
               />
             </div>
             <div className="relative">
@@ -81,19 +79,17 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all font-arabic"
+                className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all"
               />
             </div>
-            <Button type="submit" variant="primary" className="w-full" size="lg" disabled={loading}>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-gradient-to-l from-primary-500 to-primary-600 text-white font-bold rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-lg disabled:opacity-50"
+            >
               {loading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
-            </Button>
+            </button>
           </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-400">
-              بيانات تجريبية: admin / admin123
-            </p>
-          </div>
         </div>
       </motion.div>
     </div>
