@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX, FiBook, FiUser, FiMail, FiHome, FiFileText } from "react-icons/fi";
+import { FiMenu, FiX, FiBook, FiMail, FiHome, FiFileText } from "react-icons/fi";
 
 const navLinks = [
   { href: "/", label: "الرئيسية", icon: FiHome },
@@ -49,15 +49,6 @@ export default function Header() {
               );
             })}
           </nav>
-
-          <div className="hidden md:block">
-            <Link
-              href="/panel-secret-2024"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-all"
-            >
-              <FiUser className="w-4 h-4" />
-            </Link>
-          </div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
