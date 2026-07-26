@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { writeFile, mkdir } from "fs/promises";
+import { join } from "path";
+import { existsSync } from "fs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,28 +15,17 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-    const filePath = `uploads/${fileName}`;
+    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\u0600-\u06FF_]/g, "_")}`;
+    const uploadDir = join(process.cwd(), "public", "uploads");
 
-    const { error: uploadError } = await supabase.storage
-      .from("public")
-      .upload(filePath, buffer, { contentType: file.type });
-
-    if (uploadError) {
-      // If bucket doesn't exist, upload to local public folder as fallback
-      const fs = await import("fs");
-      const path = await import("path");
-      const uploadDir = path.join(process.cwd(), "public", "uploads");
-      if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-      fs.writeFileSync(path.join(uploadDir, fileName), buffer);
-      return NextResponse.json({ url: `/uploads/${fileName}` });
+    if (!existsSync(uploadDir)) {
+      await mkdir(uploadDir, { recursive: true });
     }
 
-    const { data: urlData } = supabase.storage
-      .from("public")
-      .getPublicUrl(filePath);
+    const filePath = join(uploadDir, fileName);
+    await writeFile(filePath, buffer);
 
-    return NextResponse.json({ url: urlData.publicUrl });
+    return NextResponse.json({ url: `/uploads/${fileName}` });
   } catch (error) {
     return NextResponse.json({ error: "خطأ في الرفع" }, { status: 500 });
   }
