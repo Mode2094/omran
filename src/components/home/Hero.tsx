@@ -1,8 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FiYoutube, FiFacebook, FiArrowDown, FiBookOpen, FiStar } from "react-icons/fi";
-import Button from "@/components/ui/Button";
+import { FiYoutube, FiFacebook, FiArrowDown, FiBookOpen } from "react-icons/fi";
 import Link from "next/link";
 import { useRef } from "react";
 
@@ -56,38 +55,42 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full py-20">
           {/* Content */}
           <div className="text-right">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
+            {/* Bismillah */}
+            <motion.p
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              className="text-gold-400/80 text-lg md:text-xl mb-8 font-arabic"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/10">
-                <FiStar className="w-4 h-4 text-gold-400" />
-                <span className="text-sm font-medium text-white/90">مدرسة العمران في تدبر القرآن الكريم</span>
-              </div>
-            </motion.div>
+              بسم الله الرحمن الرحيم
+            </motion.p>
 
+            {/* Main Title */}
             <motion.h1
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="mb-8"
             >
-              <span className="text-white/60 block text-2xl md:text-3xl font-normal mb-4">بسم الله الرحمن الرحيم</span>
-              <span className="text-white">مدرسة</span>
-              <br />
-              <span className="bg-gradient-to-l from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">العمران</span>
+              <span className="block text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
+                مدرسة
+              </span>
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-l from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent leading-tight">
+                العمران
+              </span>
             </motion.h1>
 
+            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl text-white/60 max-w-xl mb-10 leading-relaxed"
+              className="text-base md:text-lg text-white/60 max-w-lg mb-10 leading-relaxed"
             >
               تقدم دروساً شاملة في تدبر القرآن الكريم وعلومه وبيانه، وفق المنهج التاريخي الذي نزلت عليه سور القرآن الكريم، لمساعدة المسلمين على فهم كتابهم الكريم والتفكر في آياته العظيمة
             </motion.p>
 
+            {/* Buttons */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -107,6 +110,7 @@ export default function Hero() {
               </Link>
             </motion.div>
 
+            {/* Social + Author */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -130,7 +134,7 @@ export default function Hero() {
                 <FiFacebook className="w-5 h-5" />
               </a>
               <div className="w-px h-8 bg-white/20 mx-2" />
-              <span className="text-white/40 text-sm">تابعنّا على التواصل</span>
+              <span className="text-white/50 text-sm">عمران سميح نزال — مدرسة العمران</span>
             </motion.div>
           </div>
 
