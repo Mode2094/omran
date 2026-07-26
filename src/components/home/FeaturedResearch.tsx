@@ -90,7 +90,7 @@ export default function FeaturedResearch() {
                   </h3>
 
                   {/* Summary */}
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-6 whitespace-pre-line">
                     {research.summary}
                   </p>
 

@@ -84,7 +84,7 @@ export default function FeaturedBooks() {
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors">
                     {book.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line">
                     {book.description}
                   </p>
                   <div className="flex items-center justify-between">

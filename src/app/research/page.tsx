@@ -111,7 +111,7 @@ export default function ResearchPage() {
                         </div>
                         <h3 className="font-bold text-xl text-gray-900 mb-2">{item.title}</h3>
                         {item.summary && <p className="text-gray-500 mb-3 line-clamp-2">{item.summary}</p>}
-                        <p className="text-gray-600 text-sm line-clamp-3 mb-4">{item.content}</p>
+                        <p className="text-gray-600 text-sm line-clamp-3 mb-4 whitespace-pre-line">{item.content}</p>
                         {item.pdf_file && (
                           <a href={item.pdf_file} download>
                             <Button variant="accent" size="sm">

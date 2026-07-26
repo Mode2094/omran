@@ -112,7 +112,7 @@ export default function BooksPage() {
                       </div>
                       <h3 className="font-bold text-lg text-gray-900 mb-2">{book.title}</h3>
                       <p className="text-sm text-gray-500 mb-2">{book.author}</p>
-                      <p className="text-sm text-gray-500 line-clamp-3">{book.description}</p>
+                      <p className="text-sm text-gray-500 line-clamp-3 whitespace-pre-line">{book.description}</p>
                     </div>
                     <div className="flex gap-2 mt-4">
                       {book.pdf_file && (
