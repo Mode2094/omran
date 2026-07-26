@@ -84,16 +84,13 @@ export default function FeaturedBooks() {
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors">
                     {book.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line line-clamp-3">
                     {book.description}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-400">كتاب</span>
-                    <div className="flex items-center gap-1 text-accent-600 group-hover:gap-2 transition-all">
-                      <span className="text-sm font-medium">اقرأ المزيد</span>
-                      <FiArrowLeft className="w-4 h-4" />
-                    </div>
-                  </div>
+                  <Link href="/contact" className="inline-flex items-center gap-2 text-accent-600 hover:text-accent-700 transition-colors">
+                    <span className="text-sm font-medium">للطلب والاستفسار</span>
+                    <FiArrowLeft className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </motion.div>

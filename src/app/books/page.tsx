@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FiBook, FiDownload, FiExternalLink, FiSearch } from "react-icons/fi";
+import { FiBook, FiExternalLink, FiSearch } from "react-icons/fi";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 import Loading from "@/components/ui/Loading";
+import Link from "next/link";
 
 export default function BooksPage() {
   const [books, setBooks] = useState<any[]>([]);
@@ -114,23 +114,11 @@ export default function BooksPage() {
                       <p className="text-sm text-gray-500 mb-2">{book.author}</p>
                       <p className="text-sm text-gray-500 line-clamp-3 whitespace-pre-line">{book.description}</p>
                     </div>
-                    <div className="flex gap-2 mt-4">
-                      {book.pdf_file && (
-                        <a href={book.pdf_file} download className="flex-1">
-                          <Button variant="accent" size="sm" className="w-full">
-                            <FiDownload className="w-4 h-4 ml-2" />
-                            تحميل PDF
-                          </Button>
-                        </a>
-                      )}
-                      {book.purchase_link && (
-                        <a href={book.purchase_link} target="_blank" rel="noopener noreferrer" className="flex-1">
-                          <Button variant="primary" size="sm" className="w-full">
-                            <FiExternalLink className="w-4 h-4 ml-2" />
-                            اقتناء
-                          </Button>
-                        </a>
-                      )}
+                    <div className="mt-4">
+                      <Link href="/contact" className="inline-flex items-center gap-2 text-accent-600 hover:text-accent-700 transition-colors">
+                        <span className="text-sm font-medium">للطلب والاستفسار</span>
+                        <FiExternalLink className="w-4 h-4" />
+                      </Link>
                     </div>
                   </Card>
                 </motion.div>
