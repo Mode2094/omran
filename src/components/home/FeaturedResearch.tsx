@@ -59,14 +59,14 @@ export default function FeaturedResearch() {
         {/* Research Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {researches.map((research, index) => (
-            <motion.div
-              key={research.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
-            >
+            <Link key={research.id} href={`/research/${research.id}`}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group"
+              >
               <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 h-full border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                 {/* Hover Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -99,9 +99,10 @@ export default function FeaturedResearch() {
                     <span className="text-sm font-medium">اقرأ البحث</span>
                     <FiArrowLeft className="w-4 h-4" />
                   </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
           ))}
         </div>
 

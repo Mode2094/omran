@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FiFileText, FiDownload, FiSearch } from "react-icons/fi";
+import { FiFileText, FiSearch } from "react-icons/fi";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 import Loading from "@/components/ui/Loading";
+import Link from "next/link";
 
 export default function ResearchPage() {
   const [items, setItems] = useState<any[]>([]);
@@ -87,43 +87,37 @@ export default function ResearchPage() {
           ) : filtered.length > 0 ? (
             <div className="space-y-6">
               {filtered.map((item: any, index: number) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Card padding="lg">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      {item.cover_image && (
-                        <div className="md:w-48 h-48 bg-gradient-to-br from-accent-100 to-primary-100 rounded-xl overflow-hidden flex-shrink-0">
-                          <img src={item.cover_image} alt={item.title} className="w-full h-full object-cover" />
-                        </div>
-                      )}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-3 flex-wrap">
-                          {item.category && (
-                            <span className="text-xs px-3 py-1 bg-accent-50 text-accent-600 rounded-full">{item.category}</span>
-                          )}
-                          {item.publish_date && (
-                            <span className="text-xs text-gray-400">{item.publish_date}</span>
-                          )}
-                        </div>
-                        <h3 className="font-bold text-xl text-gray-900 mb-2">{item.title}</h3>
-                        {item.summary && <p className="text-gray-500 mb-3 line-clamp-2">{item.summary}</p>}
-                        <p className="text-gray-600 text-sm line-clamp-3 mb-4 whitespace-pre-line">{item.content}</p>
-                        {item.pdf_file && (
-                          <a href={item.pdf_file} download>
-                            <Button variant="accent" size="sm">
-                              <FiDownload className="w-4 h-4 ml-2" />
-                              تحميل PDF
-                            </Button>
-                          </a>
+                <Link key={item.id} href={`/research/${item.id}`}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <Card padding="lg" className="hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex flex-col md:flex-row gap-6">
+                        {item.cover_image && (
+                          <div className="md:w-48 h-48 bg-gradient-to-br from-accent-100 to-primary-100 rounded-xl overflow-hidden flex-shrink-0">
+                            <img src={item.cover_image} alt={item.title} className="w-full h-full object-cover" />
+                          </div>
                         )}
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-3 flex-wrap">
+                            {item.category && (
+                              <span className="text-xs px-3 py-1 bg-accent-50 text-accent-600 rounded-full">{item.category}</span>
+                            )}
+                            {item.publish_date && (
+                              <span className="text-xs text-gray-400">{item.publish_date}</span>
+                            )}
+                          </div>
+                          <h3 className="font-bold text-xl text-gray-900 mb-2">{item.title}</h3>
+                          {item.summary && <p className="text-gray-500 mb-3 line-clamp-2">{item.summary}</p>}
+                          <p className="text-gray-600 text-sm line-clamp-3 mb-4 whitespace-pre-line">{item.content}</p>
+                          <span className="text-accent-600 text-sm font-medium">اقرأ المزيد ←</span>
+                        </div>
                       </div>
-                    </div>
-                  </Card>
-                </motion.div>
+                    </Card>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           ) : (
