@@ -85,7 +85,7 @@ export default function Header() {
     setSearchTerm("");
     setSearchOpen(false);
     if (type === "book") {
-      router.push("/books");
+      router.push(`/books/${id}`);
     } else {
       router.push(`/research/${id}`);
     }
