@@ -52,11 +52,10 @@ export default function Header() {
 
           <div className="hidden md:block">
             <Link
-              href="/admin"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:text-primary-500 hover:bg-gray-50 transition-all"
+              href="/panel-secret-2024"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-all"
             >
               <FiUser className="w-4 h-4" />
-              لوحة التحكم
             </Link>
           </div>
 
@@ -97,14 +96,6 @@ export default function Header() {
                   </Link>
                 );
               })}
-              <Link
-                href="/admin"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50"
-              >
-                <FiUser className="w-5 h-5" />
-                لوحة التحكم
-              </Link>
             </div>
           </motion.div>
         )}

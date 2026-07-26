@@ -1,36 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { requireAuth } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 export async function GET() {
   try {
-    const contents = await prisma.siteContent.findMany();
-    const contentMap: Record<string, string> = {};
-    contents.forEach((c) => { contentMap[c.key] = c.value; });
-    return NextResponse.json(contentMap);
+    const { data: contents, error } = await supabase
+      .from("site_content")
+      .select("*");
+    if (error) throw error;
+    const result: Record<string, string> = {};
+    contents?.forEach((c: any) => { result[c.key] = c.value; });
+    return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
   }
 }
 
-export async function PUT(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    await requireAuth();
     const body = await request.json();
+    const { key, value } = body;
 
-    for (const [key, value] of Object.entries(body)) {
-      await prisma.siteContent.upsert({
-        where: { key },
-        update: { value: value as string },
-        create: { key, value: value as string },
-      });
+    if (!key || value === undefined) {
+      return NextResponse.json({ error: "المفتاح والقيمة مطلوبان" }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true });
-  } catch (error: any) {
-    if (error.message === "Unauthorized") {
-      return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
-    }
+    const { data, error } = await supabase
+      .from("site_content")
+      .upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: "key" })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return NextResponse.json(data);
+  } catch (error) {
     return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
   }
 }

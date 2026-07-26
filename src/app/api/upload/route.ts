@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-
-export const runtime = "nodejs";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(request: NextRequest) {
   try {
-    await requireAuth();
     const formData = await request.formData();
     const file = formData.get("file") as File;
 
@@ -18,23 +13,29 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const ext = file.name.split(".").pop();
-    const filename = `${Date.now()}-${Math.random().toString(36).substring(2)}.${ext}`;
+    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
+    const filePath = `uploads/${fileName}`;
 
-    const uploadDir = join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
+    const { error: uploadError } = await supabase.storage
+      .from("public")
+      .upload(filePath, buffer, { contentType: file.type });
 
-    const filepath = join(uploadDir, filename);
-    await writeFile(filepath, buffer);
-
-    return NextResponse.json({
-      url: `/uploads/${filename}`,
-      filename,
-    });
-  } catch (error: any) {
-    if (error.message === "Unauthorized") {
-      return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
+    if (uploadError) {
+      // If bucket doesn't exist, upload to local public folder as fallback
+      const fs = await import("fs");
+      const path = await import("path");
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
+      if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+      fs.writeFileSync(path.join(uploadDir, fileName), buffer);
+      return NextResponse.json({ url: `/uploads/${fileName}` });
     }
+
+    const { data: urlData } = supabase.storage
+      .from("public")
+      .getPublicUrl(filePath);
+
+    return NextResponse.json({ url: urlData.publicUrl });
+  } catch (error) {
     return NextResponse.json({ error: "خطأ في الرفع" }, { status: 500 });
   }
 }

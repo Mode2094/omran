@@ -1,56 +1,57 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { requireAuth } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const article = await prisma.article.findUnique({
-      where: { id: params.id },
-    });
-    if (!article) {
-      return NextResponse.json({ error: "المقال غير موجود" }, { status: 404 });
-    }
+    const { data: article, error } = await supabase
+      .from("articles")
+      .select("*")
+      .eq("id", params.id)
+      .single();
+    if (error) throw error;
+    return NextResponse.json(article);
+  } catch (error) {
+    return NextResponse.json({ error: "المقال غير موجود" }, { status: 404 });
+  }
+}
+
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const body = await request.json();
+    const { title, summary, content, coverImage, category, publishDate, featured } = body;
+
+    const { data: article, error } = await supabase
+      .from("articles")
+      .update({
+        title,
+        summary,
+        content,
+        cover_image: coverImage || null,
+        category: category || null,
+        publish_date: publishDate || null,
+        featured: featured || false,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", params.id)
+      .select()
+      .single();
+
+    if (error) throw error;
     return NextResponse.json(article);
   } catch (error) {
     return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    await requireAuth();
-    const body = await request.json();
-    const article = await prisma.article.update({
-      where: { id: params.id },
-      data: body,
-    });
-    return NextResponse.json(article);
-  } catch (error: any) {
-    if (error.message === "Unauthorized") {
-      return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
-    }
-    return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
-  }
-}
-
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    await requireAuth();
-    await prisma.article.delete({ where: { id: params.id } });
-    return NextResponse.json({ success: true });
-  } catch (error: any) {
-    if (error.message === "Unauthorized") {
-      return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
-    }
+    const { error } = await supabase
+      .from("articles")
+      .delete()
+      .eq("id", params.id);
+    if (error) throw error;
+    return NextResponse.json({ message: "تم الحذف" });
+  } catch (error) {
     return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
   }
 }

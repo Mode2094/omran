@@ -3,60 +3,26 @@
 import { motion } from "framer-motion";
 import { FiArrowLeft, FiBook } from "react-icons/fi";
 import Link from "next/link";
-
-const books = [
-  {
-    id: 1,
-    title: "التدبر القرآني",
-    description: "دراسة شاملة لآداب وأساليب التدبر القرآني مع تطبيقات عملية من كتاب الله",
-    category: "التدبر القرآني",
-    image: "/uploads/books/book-01.png",
-  },
-  {
-    id: 2,
-    title: "التدبر القرآني بين النظرية والتطبيق",
-    description: "بحث معمّق في منهج التدبر القرآني من النظرية إلى التطبيق العملي",
-    category: "التدبر القرآني",
-    image: "/uploads/books/book-02.png",
-  },
-  {
-    id: 3,
-    title: "آداب التدبر القرآني",
-    description: "دليل شامل لآداب طالب القرآن في التدبر والتدبر والتفكر",
-    category: "التدبر القرآني",
-    image: "/uploads/books/book-03.png",
-  },
-  {
-    id: 4,
-    title: "أثر التدبر القرآني في حياة المسلم",
-    description: "دراسة تحليلية لأثر التدبر القرآني في بناء الشخصية المسلمة",
-    category: "التدبر القرآني",
-    image: "/uploads/books/book-04.png",
-  },
-  {
-    id: 5,
-    title: "أساليب التدبر القرآني",
-    description: "دراسة نقدية لأساليب التدبر القرآني عند المفسرين",
-    category: "التدبر القرآني",
-    image: "/uploads/books/book-05.png",
-  },
-  {
-    id: 6,
-    title: "أثر التدبر القرآني في حياة المسلم",
-    description: "بحث تحليلي في أثر التدبر القرآني في سلوك المسلم وحياته",
-    category: "التدبر القرآني",
-    image: "/uploads/books/book-06.png",
-  },
-];
+import { useEffect, useState } from "react";
 
 export default function FeaturedBooks() {
+  const [books, setBooks] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/books")
+      .then((res) => res.json())
+      .then((data) => {
+        const items = Array.isArray(data) ? data : [];
+        setBooks(items.filter((b: any) => b.featured).slice(0, 6));
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
-      {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Header */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -89,9 +55,8 @@ export default function FeaturedBooks() {
           </motion.p>
         </div>
 
-        {/* Books Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {books.map((book, index) => (
+          {books.map((book: any, index: number) => (
             <motion.div
               key={book.id}
               initial={{ opacity: 0, y: 30 }}
@@ -101,27 +66,20 @@ export default function FeaturedBooks() {
               className="group"
             >
               <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-accent-200 hover:-translate-y-2">
-                {/* Book Image */}
                 <div className="relative h-64 overflow-hidden">
                   <img
-                    src={book.image}
+                    src={book.cover_image || "/uploads/books/book-01.png"}
                     alt={book.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-                  {/* Category Badge */}
                   <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full">
                     <span className="text-xs font-medium text-gray-700">{book.category}</span>
                   </div>
-
-                  {/* Book Number */}
                   <div className="absolute bottom-4 left-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center">
                     <span className="font-bold text-gray-900">{String(index + 1).padStart(2, '0')}</span>
                   </div>
                 </div>
-
-                {/* Book Info */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors">
                     {book.title}
@@ -142,7 +100,6 @@ export default function FeaturedBooks() {
           ))}
         </div>
 
-        {/* View All */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

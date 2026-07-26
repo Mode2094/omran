@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { requireAuth } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 export async function GET() {
   try {
-    const articles = await prisma.article.findMany({
-      orderBy: { createdAt: "desc" },
-    });
+    const { data: articles, error } = await supabase
+      .from("articles")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
     return NextResponse.json(articles);
   } catch (error) {
     return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
@@ -15,34 +16,30 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    await requireAuth();
     const body = await request.json();
     const { title, summary, content, coverImage, category, publishDate, featured } = body;
 
     if (!title || !content) {
-      return NextResponse.json(
-        { error: "العنوان والمحتوى مطلوبان" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "عنوان ومحتوى المقال مطلوبان" }, { status: 400 });
     }
 
-    const article = await prisma.article.create({
-      data: {
+    const { data: article, error } = await supabase
+      .from("articles")
+      .insert([{
         title,
-        summary: summary || null,
+        summary: summary || "",
         content,
-        coverImage: coverImage || null,
+        cover_image: coverImage || null,
         category: category || null,
-        publishDate: publishDate || null,
+        publish_date: publishDate || null,
         featured: featured || false,
-      },
-    });
+      }])
+      .select()
+      .single();
 
+    if (error) throw error;
     return NextResponse.json(article, { status: 201 });
-  } catch (error: any) {
-    if (error.message === "Unauthorized") {
-      return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
-    }
+  } catch (error) {
     return NextResponse.json({ error: "خطأ في الخادم" }, { status: 500 });
   }
 }

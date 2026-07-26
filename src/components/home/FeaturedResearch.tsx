@@ -80,7 +80,7 @@ export default function FeaturedResearch() {
                     </div>
                     <div className="flex items-center gap-1 text-gray-400">
                       <FiCalendar className="w-3 h-3" />
-                      <span className="text-xs">{research.publishDate}</span>
+                      <span className="text-xs">{research.publish_date}</span>
                     </div>
                   </div>
 
