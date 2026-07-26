@@ -41,9 +41,9 @@ export default function ContactPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
               <FiMail className="w-16 h-16 mx-auto mb-6 opacity-80" />
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">تواصل معي</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">تواصل معنا</h1>
               <p className="text-xl text-white/80 max-w-2xl mx-auto">
-                يسعدني تلقي استفساراتكم وأسئلتكم في تدبر القرآن الكريم وعلومه
+                يسعد مدرسة العمران تلقي استفساراتكم وأسئلتكم في تدبر القرآن الكريم وعلومه
               </p>
             </motion.div>
           </div>
@@ -64,7 +64,7 @@ export default function ContactPage() {
                       <FiCheck className="w-10 h-10 text-green-500" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">تم إرسال رسالتك بنجاح!</h3>
-                    <p className="text-gray-500">سأرد عليك في أقرب وقت ممكن إن شاء الله</p>
+                    <p className="text-gray-500">سنرد عليك في أقرب وقت ممكن إن شاء الله</p>
                     <Button variant="primary" className="mt-8" onClick={() => setSent(false)}>
                       إرسال رسالة أخرى
                     </Button>
@@ -155,7 +155,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">البريد الإلكتروني</p>
-                      <p className="text-sm text-gray-500">contact@omran-nazal.com</p>
+                      <p className="text-sm text-gray-500">omran_nazal@yahoo.com</p>
                     </div>
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
               <div className="bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl p-8 text-white">
                 <h3 className="font-bold text-lg mb-4">ملاحظة هامة</h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  أسعى للرد على جميع الاستفسارات العلمية في أقرب وقت ممكن. يُفضل ذكر الأدلة الشرعية عند طرح الأسئلة لتسهيل المراجعة والبحث.
+                  نسعى للرد على جميع الاستفسارات العلمية في أقرب وقت ممكن. يُفضل ذكر الأدلة الشرعية عند طرح الأسئلة لتسهيل المراجعة والبحث.
                 </p>
               </div>
             </motion.div>
