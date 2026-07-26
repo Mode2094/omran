@@ -63,12 +63,12 @@ export default function AdminBooksPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">إدارة الكتب</h1>
-          <p className="text-gray-500 mt-1">إضافة وتعديل وحذف الكتب</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">إدارة الكتب</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">إضافة وتعديل وحذف الكتب</p>
         </div>
-        <Button onClick={() => openModal()}>
+        <Button onClick={() => openModal()} className="self-start sm:self-auto">
           <FiPlus className="w-5 h-5 ml-2" />
           إضافة كتاب
         </Button>
@@ -79,29 +79,29 @@ export default function AdminBooksPage() {
           {books.length > 0 ? (
             <div className="divide-y divide-gray-100">
               {books.map((book: any) => (
-                <div key={book.id} className="flex items-center gap-4 p-6 hover:bg-gray-50 transition-colors">
-                  <div className="w-16 h-20 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    {book.cover_image ? <img src={book.cover_image} alt="" className="w-full h-full object-cover rounded-lg" /> : <FiBook className="w-6 h-6 text-primary-300" />}
+                <div key={book.id} className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                  <div className="w-12 h-16 sm:w-16 sm:h-20 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    {book.cover_image ? <img src={book.cover_image} alt="" className="w-full h-full object-cover rounded-lg" /> : <FiBook className="w-5 h-5 sm:w-6 sm:h-6 text-primary-300" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-900 truncate">{book.title}</h3>
-                    <p className="text-sm text-gray-500 truncate">{book.description}</p>
+                    <h3 className="font-bold text-gray-900 truncate text-sm sm:text-base">{book.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-500 truncate hidden sm:block">{book.description}</p>
                     <div className="flex gap-2 mt-1">
                       {book.category && <span className="text-xs px-2 py-0.5 bg-primary-50 text-primary-500 rounded">{book.category}</span>}
                       {book.featured && <span className="text-xs px-2 py-0.5 bg-gold-50 text-gold-600 rounded">مميز</span>}
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button onClick={() => openModal(book)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEdit3 className="w-5 h-5" /></button>
-                    <button onClick={() => handleDelete(book.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-5 h-5" /></button>
+                  <div className="flex gap-1 sm:gap-2">
+                    <button onClick={() => openModal(book)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEdit3 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
+                    <button onClick={() => handleDelete(book.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-16">
-              <FiBook className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">لا توجد كتب بعد. اضغط "إضافة كتاب" للبدء</p>
+            <div className="text-center py-12 sm:py-16">
+              <FiBook className="w-12 h-12 sm:w-16 sm:h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500 text-sm sm:text-base">لا توجد كتب بعد. اضغط "إضافة كتاب" للبدء</p>
             </div>
           )}
         </div>
@@ -111,7 +111,7 @@ export default function AdminBooksPage() {
         <div className="space-y-4">
           <Input label="عنوان الكتاب" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="أدخل عنوان الكتاب" />
           <Textarea label="الوصف" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="أدخل وصف الكتاب" rows={4} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input label="التصنيف" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} placeholder="مثال: أدب، علمي" />
             <Input label="تاريخ النشر" value={form.publishDate} onChange={(e) => setForm({ ...form, publishDate: e.target.value })} placeholder="2024" />
           </div>

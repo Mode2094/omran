@@ -30,8 +30,8 @@ export default function AdminMessagesPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">الرسائل الواردة</h1>
-        <p className="text-gray-500 mt-1">إدارة رسائل التواصل الواردة من الزوار</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">الرسائل الواردة</h1>
+        <p className="text-gray-500 mt-1 text-sm sm:text-base">إدارة رسائل التواصل الواردة من الزوار</p>
       </div>
 
       {loading ? <Loading /> : (
@@ -39,30 +39,29 @@ export default function AdminMessagesPage() {
           {messages.length > 0 ? (
             <div className="divide-y divide-gray-100">
               {messages.map((msg: any) => (
-                <div key={msg.id} className="flex items-center gap-4 p-6 hover:bg-gray-50 transition-colors">
-                  <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FiMail className="w-6 h-6 text-primary-500" />
+                <div key={msg.id} className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <FiMail className="w-5 h-5 sm:w-6 sm:h-6 text-primary-500" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-gray-900">{msg.name}</h3>
+                      <h3 className="font-bold text-gray-900 text-sm sm:text-base">{msg.name}</h3>
                       {!msg.read && <span className="w-2 h-2 bg-red-500 rounded-full" />}
                     </div>
-                    <p className="text-sm text-gray-500">{msg.email}</p>
-                    <p className="text-sm text-gray-400 truncate mt-1">{msg.message}</p>
+                    <p className="text-xs sm:text-sm text-gray-500">{msg.email}</p>
+                    <p className="text-xs sm:text-sm text-gray-400 truncate mt-1">{msg.message}</p>
                   </div>
-                  <span className="text-xs text-gray-400 hidden sm:block">{formatDate(msg.created_at)}</span>
-                  <div className="flex gap-2">
-                    <button onClick={() => setSelected(msg)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEye className="w-5 h-5" /></button>
-                    <button onClick={() => handleDelete(msg.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-5 h-5" /></button>
+                  <div className="flex gap-1 sm:gap-2">
+                    <button onClick={() => setSelected(msg)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEye className="w-4 h-4 sm:w-5 sm:h-5" /></button>
+                    <button onClick={() => handleDelete(msg.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-16">
-              <FiMail className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">لا توجد رسائل بعد</p>
+            <div className="text-center py-12 sm:py-16">
+              <FiMail className="w-12 h-12 sm:w-16 sm:h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500 text-sm sm:text-base">لا توجد رسائل بعد</p>
             </div>
           )}
         </div>

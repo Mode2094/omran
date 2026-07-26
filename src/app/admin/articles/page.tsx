@@ -62,12 +62,12 @@ export default function AdminArticlesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">إدارة المقالات</h1>
-          <p className="text-gray-500 mt-1">إضافة وتعديل وحذف المقالات</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">إدارة المقالات</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">إضافة وتعديل وحذف المقالات</p>
         </div>
-        <Button onClick={() => openModal()}>
+        <Button onClick={() => openModal()} className="self-start sm:self-auto">
           <FiPlus className="w-5 h-5 ml-2" />
           إضافة مقال
         </Button>
@@ -78,25 +78,25 @@ export default function AdminArticlesPage() {
           {items.length > 0 ? (
             <div className="divide-y divide-gray-100">
               {items.map((item: any) => (
-                <div key={item.id} className="flex items-center gap-4 p-6 hover:bg-gray-50 transition-colors">
-                  <div className="w-12 h-12 bg-gold-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FiEdit3 className="w-6 h-6 text-gold-500" />
+                <div key={item.id} className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gold-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <FiEdit3 className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-900 truncate">{item.title}</h3>
-                    <p className="text-sm text-gray-500 truncate">{item.summary || item.content.slice(0, 80)}</p>
+                    <h3 className="font-bold text-gray-900 truncate text-sm sm:text-base">{item.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-500 truncate hidden sm:block">{item.summary || item.content.slice(0, 80)}</p>
                   </div>
-                  <div className="flex gap-2">
-                    <button onClick={() => openModal(item)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEdit3 className="w-5 h-5" /></button>
-                    <button onClick={() => handleDelete(item.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-5 h-5" /></button>
+                  <div className="flex gap-1 sm:gap-2">
+                    <button onClick={() => openModal(item)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-primary-500"><FiEdit3 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
+                    <button onClick={() => handleDelete(item.id)} className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-500"><FiTrash2 className="w-4 h-4 sm:w-5 sm:h-5" /></button>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-16">
-              <FiEdit3 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">لا توجد مقالات بعد</p>
+            <div className="text-center py-12 sm:py-16">
+              <FiEdit3 className="w-12 h-12 sm:w-16 sm:h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500 text-sm sm:text-base">لا توجد مقالات بعد</p>
             </div>
           )}
         </div>
@@ -107,7 +107,7 @@ export default function AdminArticlesPage() {
           <Input label="عنوان المقال" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
           <Input label="ملخص قصير" value={form.summary} onChange={(e) => setForm({ ...form, summary: e.target.value })} />
           <Textarea label="المحتوى" value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} rows={10} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input label="التصنيف" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
             <Input label="تاريخ النشر" value={form.publishDate} onChange={(e) => setForm({ ...form, publishDate: e.target.value })} />
           </div>

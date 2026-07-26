@@ -57,8 +57,8 @@ export default function AdminSettingsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">الإعدادات</h1>
-        <p className="text-gray-500 mt-1">إدارة حسابك وتغيير كلمة المرور</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">الإعدادات</h1>
+        <p className="text-gray-500 mt-1 text-sm sm:text-base">إدارة حسابك وتغيير كلمة المرور</p>
       </div>
 
       <div className="max-w-lg">

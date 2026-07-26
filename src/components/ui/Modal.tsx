@@ -22,16 +22,10 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
     return () => { document.body.style.overflow = "unset"; };
   }, [isOpen]);
 
-  const sizes = {
-    sm: "max-w-md",
-    md: "max-w-2xl",
-    lg: "max-w-4xl",
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center md:p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -40,13 +34,13 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
             onClick={onClose}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className={`relative bg-white rounded-2xl shadow-2xl w-full ${sizes[size]} max-h-[90vh] overflow-y-auto font-arabic`}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            className="relative bg-white md:rounded-2xl shadow-2xl w-full md:max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto rounded-t-2xl"
           >
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+            <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-100 sticky top-0 bg-white z-10">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">{title}</h2>
               <button
                 onClick={onClose}
                 className="p-2 rounded-xl hover:bg-gray-100 transition-colors"
@@ -54,7 +48,7 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
                 <FiX className="w-5 h-5" />
               </button>
             </div>
-            <div className="p-6">{children}</div>
+            <div className="p-4 md:p-6">{children}</div>
           </motion.div>
         </div>
       )}

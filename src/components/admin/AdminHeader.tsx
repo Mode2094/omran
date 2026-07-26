@@ -84,7 +84,16 @@ export default function AdminHeader() {
 
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-black/50" onClick={() => setMobileOpen(false)}>
-          <div className="w-72 bg-white h-full mr-auto p-4 space-y-2" onClick={(e) => e.stopPropagation()}>
+          <div className="w-72 bg-white h-full p-4 space-y-2" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
+              <Link href="/admin" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
+                <img src="/logo.png" alt="شعار" className="w-10 h-10 rounded-xl object-contain" />
+                <div>
+                  <h1 className="font-bold text-gray-900">لوحة التحكم</h1>
+                  <p className="text-xs text-gray-500">إدارة الموقع</p>
+                </div>
+              </Link>
+            </div>
             {adminLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -92,20 +101,33 @@ export default function AdminHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50"
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                    pathname === link.href
+                      ? "bg-primary-500 text-white shadow-lg shadow-primary-500/25"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
                 >
                   <Icon className="w-5 h-5" />
                   {link.label}
                 </Link>
               );
             })}
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 w-full"
-            >
-              <FiLogOut className="w-5 h-5" />
-              تسجيل الخروج
-            </button>
+            <div className="pt-4 border-t border-gray-100 space-y-2">
+              <Link
+                href="/"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50"
+                onClick={() => setMobileOpen(false)}
+              >
+                العودة للموقع
+              </Link>
+              <button
+                onClick={() => { setMobileOpen(false); handleLogout(); }}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 w-full"
+              >
+                <FiLogOut className="w-5 h-5" />
+                تسجيل الخروج
+              </button>
+            </div>
           </div>
         </div>
       )}
